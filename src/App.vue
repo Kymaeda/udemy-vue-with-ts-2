@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import PersonContainer from './components/PersonContainer.vue';
 </script>
 
 <template>
+  <PersonContainer />
 </template>
 
 <style scoped>
