@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 const name = ref<string>('')
 const age = ref<number>(0)
 const inputName = ref()
@@ -12,6 +12,14 @@ const submit = () => {
   age.value = 0
   inputName.value.focus()
 }
+
+const nameMaxLength = 15
+const isValidName = computed(() => {
+  return name.value.length <= nameMaxLength
+})
+const warningColor = computed(() => {
+  return isValidName.value ? 'gray' : 'red'
+})
 </script>
 
 <template>
@@ -19,14 +27,14 @@ const submit = () => {
     <div class="input-container">
       <div class="input">
         <p>name: </p>
-        <input v-model="name" ref="inputName"/>
+        <input v-model="name" ref="inputName" class="input-name"/>
       </div>
       <div class="input">
         <p>age: </p>
         <input v-model="age" type="number"/>
       </div>
     </div>
-    <button class="submit-btn" @click="submit">post</button>
+    <button class="submit-btn" @click="submit" :disabled="!isValidName">post</button>
   </div>
 </template>
 
@@ -68,6 +76,10 @@ const submit = () => {
   height: 35px;
   width: 200px;
   border-radius: 5px;
+}
+
+.input-name {
+  background-color: v-bind(warningColor);
 }
 
 .submit-btn {

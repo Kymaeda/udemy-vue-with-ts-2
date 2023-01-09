@@ -14,7 +14,9 @@ defineProps<Props>()
 
 const emit = defineEmits(['remove'])
 const removePerson = (person_id: number) => {
-  emit('remove', person_id)
+  if (confirm('削除しますか？')) {
+    emit('remove', person_id)
+  }
 }
 </script>
 
