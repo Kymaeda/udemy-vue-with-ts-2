@@ -1,18 +1,32 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+const name = ref<string>('')
+const age = ref<number>(0)
+const inputName = ref()
+
+const emit = defineEmits(['submit'])
+const submit = () => {
+  const person = { id: Math.random(), name: name.value, age: age.value }
+  emit('submit', person)
+  name.value = ''
+  age.value = 0
+  inputName.value.focus()
+}
+</script>
 
 <template>
   <div class="form-container">
     <div class="input-container">
       <div class="input">
         <p>name: </p>
-        <input />
+        <input v-model="name" ref="inputName"/>
       </div>
       <div class="input">
         <p>age: </p>
-        <input />
+        <input v-model="age" type="number"/>
       </div>
     </div>
-    <button class="submit-btn">post</button>
+    <button class="submit-btn" @click="submit">post</button>
   </div>
 </template>
 
@@ -32,7 +46,7 @@
   padding: 10px;
   display: flex;
   justify-content: center;
-  line-height: 35px;
+  height: 35px;
 }
 
 .input span {
