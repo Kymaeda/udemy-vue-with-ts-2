@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Button from './Button.vue'
+
 interface Person {
   id: number,
   name: string,
@@ -29,6 +31,8 @@ const removePerson = (person_id: number) => {
           <p class="person-name">{{ person.name }}</p>
           <p class="person-age">{{ person.age }}</p>
           <button @click="removePerson(person.id)">Delete</button>
+          <Button>Delete</Button>
+          <Button></Button>
         </li>
       </ul>
     </div>
