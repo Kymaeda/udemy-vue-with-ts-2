@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import PersonForm from './PersonForm.vue';
 import PersonList from './PersonList.vue';
-import { ref, Ref, computed } from 'vue';
+import { ref, Ref, computed, provide } from 'vue';
+import { persons, addPerson, removePerson } from './../usePerson'
 
 interface Person {
   id: number,
@@ -9,15 +10,16 @@ interface Person {
   age: number,
 }
 
-const persons: Ref<Person[]> = ref([]);
-const addPerson = (person: Person) => {
-  persons.value.push(person)
-}
+// const persons: Ref<Person[]> = ref([]);
 
-const removePerson = (person_id: number) => {
-  console.log('person_id', person_id)
-  persons.value = persons.value.filter(person => person.id != person_id)
-}
+provide('persons', persons)
+provide('addPerson', addPerson)
+provide('removePerson', removePerson)
+
+// const removePerson = (person_id: number) => {
+//   console.log('person_id', person_id)
+//   persons.value = persons.value.filter(person => person.id != person_id)
+// }
 
 const isActiveTab = ref(1)
 const activate = (tabNum: number) => {
@@ -46,8 +48,11 @@ const currentComponent = computed(() => {
     <!-- NOTE: bindやイベントハンドラが同じでコンポーネントの中身が違うう物を切り替えるのに動的コンポーネントは使える -->
     <!-- <component :is="currentComponent" @submit="addPerson" ></component> -->
 
-    <component :is="PersonForm" @submit="addPerson" ></component>
-    <component :is="PersonList" :persons="persons" @remove="removePerson"></component>
+    <!-- <component :is="PersonForm" @submit="addPerson" ></component> -->
+    <!-- <component :is="PersonList" :persons="persons" @remove="removePerson"></component> -->
+
+    <PersonForm @submit="addPerson"/>
+    <PersonList :persons="persons" @remove="removePerson" />
   </div>
 </template>
 

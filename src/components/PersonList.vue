@@ -1,23 +1,27 @@
 <script setup lang="ts">
+import { inject } from 'vue';
 import Button from './Button.vue'
 
-interface Person {
-  id: number,
-  name: string,
-  age: number
-}
-interface Props {
-  persons: Person[]
-}
+const personList = inject('persons')
+// const _removePerson = inject('removePerson')
 
-// NOTE: 直書きすると、↓。これを汎用的に使いまわせるようにinterfaceを使って書く
-// defineProps<{ persons: [{ id: number, name: string, age: number }] }>()
-defineProps<Props>()
+// interface Person {
+//   id: number,
+//   name: string,
+//   age: number
+// }
+// interface Props {
+//   persons: Person[]
+// }
 
-const emit = defineEmits(['remove'])
+// // NOTE: 直書きすると、↓。これを汎用的に使いまわせるようにinterfaceを使って書く
+// // defineProps<{ persons: [{ id: number, name: string, age: number }] }>()
+// defineProps<Props>()
+
+// const emit = defineEmits(['remove'])
 const removePerson = (person_id: number) => {
   if (confirm('削除しますか？')) {
-    emit('remove', person_id)
+    // _removePerson(person_id)
   }
 }
 </script>
@@ -27,7 +31,7 @@ const removePerson = (person_id: number) => {
     <h1>Persons</h1>
     <div>
       <ul class="person-list">
-        <li v-for="person in persons" :key="person.id" class="person">
+        <li v-for="person in personList" :key="person.id" class="person">
           <p class="person-name">{{ person.name }}</p>
           <p class="person-age">{{ person.age }}</p>
           <button @click="removePerson(person.id)">Delete</button>

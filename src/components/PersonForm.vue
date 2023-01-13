@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, inject } from 'vue'
 const name = ref<string>('')
 const age = ref<number>(0)
 const inputName = ref()
 
-const emit = defineEmits(['submit'])
+const addPerson = inject('addPerson')
+
+// const emit = defineEmits(['submit'])
 const submit = () => {
-  const person = { id: Math.random(), name: name.value, age: age.value }
-  emit('submit', person)
+  // const person = { id: Math.random(), name: name.value, age: age.value }
+  // emit('submit', person)
+  addPerson(name.value, age.value)
   name.value = ''
   age.value = 0
   inputName.value.focus()
