@@ -2,7 +2,7 @@
 import PersonForm from './PersonForm.vue';
 import PersonList from './PersonList.vue';
 import { ref, Ref, computed, provide } from 'vue';
-import { persons, addPerson, removePerson } from './../usePerson'
+import { persons } from './../usePerson'
 
 interface Person {
   id: number,
@@ -13,8 +13,8 @@ interface Person {
 // const persons: Ref<Person[]> = ref([]);
 
 provide('persons', persons)
-provide('addPerson', addPerson)
-provide('removePerson', removePerson)
+// provide('addPerson', addPerson)
+// provide('removePerson', removePerson)
 
 // const removePerson = (person_id: number) => {
 //   console.log('person_id', person_id)

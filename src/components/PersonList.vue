@@ -2,8 +2,7 @@
 import { inject } from 'vue';
 import Button from './Button.vue'
 
-const personList = inject('persons')
-// const _removePerson = inject('removePerson')
+const { persons, removePerson: _removePerson } = inject('persons')
 
 // interface Person {
 //   id: number,
@@ -21,7 +20,7 @@ const personList = inject('persons')
 // const emit = defineEmits(['remove'])
 const removePerson = (person_id: number) => {
   if (confirm('削除しますか？')) {
-    // _removePerson(person_id)
+    _removePerson(person_id)
   }
 }
 </script>
@@ -31,7 +30,7 @@ const removePerson = (person_id: number) => {
     <h1>Persons</h1>
     <div>
       <ul class="person-list">
-        <li v-for="person in personList" :key="person.id" class="person">
+        <li v-for="person in persons" :key="person.id" class="person">
           <p class="person-name">{{ person.name }}</p>
           <p class="person-age">{{ person.age }}</p>
           <button @click="removePerson(person.id)">Delete</button>

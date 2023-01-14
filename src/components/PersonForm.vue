@@ -4,7 +4,8 @@ const name = ref<string>('')
 const age = ref<number>(0)
 const inputName = ref()
 
-const addPerson = inject('addPerson')
+// const addPerson = inject('addPerson')
+const { addPerson } = inject('persons')
 
 // const emit = defineEmits(['submit'])
 const submit = () => {
