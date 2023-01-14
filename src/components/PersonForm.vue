@@ -1,11 +1,18 @@
 <script setup lang="ts">
 import { ref, computed, inject } from 'vue'
+import { personKey } from './../usePerson'
+
 const name = ref<string>('')
 const age = ref<number>(0)
 const inputName = ref()
 
 // const addPerson = inject('addPerson')
-const { addPerson } = inject('persons')
+// const { addPerson } = inject('persons')
+const state = inject(personKey)
+if (!state) {
+  throw new Error('key is undefined')
+}
+const { addPerson } = state
 
 // const emit = defineEmits(['submit'])
 const submit = () => {

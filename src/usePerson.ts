@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { ref, InjectionKey } from "vue";
 
 interface Person {
   id: number;
@@ -37,5 +37,7 @@ export const persons = (() => {
   return { persons, addPerson, removePerson };
 })()
 
-// type PersonTypes = typeof persons;
+type PersonTypes = typeof persons;
 
+console.log(typeof persons);
+export const personKey: InjectionKey<PersonTypes> = Symbol('usePerson');

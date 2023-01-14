@@ -1,8 +1,16 @@
 <script setup lang="ts">
 import { inject } from 'vue';
 import Button from './Button.vue'
+import { personKey } from './../usePerson'
 
-const { persons, removePerson: _removePerson } = inject('persons')
+// キーがundefinedの可能性があり、型エラーになるので、undefinedでない場合のみinjectを使うようにする
+const state = inject(personKey)
+if (!state) {
+  throw new Error('key is undefined')
+}
+const { persons, removePerson: deletePerson } = state
+console.log(persons)
+console.log(deletePerson)
 
 // interface Person {
 //   id: number,
@@ -19,8 +27,9 @@ const { persons, removePerson: _removePerson } = inject('persons')
 
 // const emit = defineEmits(['remove'])
 const removePerson = (person_id: number) => {
+  console.log("aaaa")
   if (confirm('削除しますか？')) {
-    _removePerson(person_id)
+    deletePerson(person_id)
   }
 }
 </script>

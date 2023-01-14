@@ -2,17 +2,19 @@
 import PersonForm from './PersonForm.vue';
 import PersonList from './PersonList.vue';
 import { ref, Ref, computed, provide } from 'vue';
-import { persons } from './../usePerson'
+import { persons, personKey } from './../usePerson'
 
-interface Person {
-  id: number,
-  name: string,
-  age: number,
-}
+// interface Person {
+//   id: number,
+//   name: string,
+//   age: number,
+// }
 
 // const persons: Ref<Person[]> = ref([]);
 
-provide('persons', persons)
+// provide('persons', persons)
+provide(personKey, persons)
+
 // provide('addPerson', addPerson)
 // provide('removePerson', removePerson)
 
@@ -51,8 +53,8 @@ const currentComponent = computed(() => {
     <!-- <component :is="PersonForm" @submit="addPerson" ></component> -->
     <!-- <component :is="PersonList" :persons="persons" @remove="removePerson"></component> -->
 
-    <PersonForm @submit="addPerson"/>
-    <PersonList :persons="persons" @remove="removePerson" />
+    <PersonForm />
+    <PersonList />
   </div>
 </template>
 
