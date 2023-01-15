@@ -31,6 +31,13 @@ const isValidName = computed(() => {
 const warningColor = computed(() => {
   return isValidName.value ? 'gray' : 'red'
 })
+
+// v-focusディレクティブを定義する場合、v始まりのパスカルケース
+const vFocus = {
+  mounted: (el: HTMLElement) => {
+    el.focus()
+  }
+}
 </script>
 
 <template>
@@ -38,7 +45,7 @@ const warningColor = computed(() => {
     <div class="input-container">
       <div class="input">
         <p>name: </p>
-        <input v-model="name" ref="inputName" class="input-name"/>
+        <input v-model="name" ref="inputName" class="input-name" v-focus />
       </div>
       <div class="input">
         <p>age: </p>
