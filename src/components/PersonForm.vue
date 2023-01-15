@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, inject } from 'vue'
+import { ref, computed, inject, DirectiveBinding } from 'vue'
 import { personKey } from './../usePerson'
 
 const name = ref<string>('')
@@ -19,6 +19,7 @@ const submit = () => {
   // const person = { id: Math.random(), name: name.value, age: age.value }
   // emit('submit', person)
   addPerson(name.value, age.value)
+  console.log('name: ', name.value)
   name.value = ''
   age.value = 0
   inputName.value.focus()
@@ -34,8 +35,12 @@ const warningColor = computed(() => {
 
 // v-focusディレクティブを定義する場合、v始まりのパスカルケース
 const vFocus = {
-  mounted: (el: HTMLElement) => {
+  mounted: (el: HTMLElement, binding: DirectiveBinding) => {
     el.focus()
+
+    if (binding.modifiers.alert) {
+      el.style.backgroundColor ="yellow"
+    }
   }
 }
 </script>
@@ -52,7 +57,7 @@ const vFocus = {
         <input v-model="age" type="number"/>
       </div>
     </div>
-    <button class="submit-btn" @click="submit" :disabled="!isValidName">post</button>
+    <button class="submit-btn" @click.prevent="submit" :disabled="!isValidName">post</button>
   </div>
 </template>
 
