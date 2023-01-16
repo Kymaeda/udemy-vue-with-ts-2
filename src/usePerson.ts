@@ -4,11 +4,12 @@ interface Person {
   id: number;
   name: string;
   age: number;
+  rating: string;
 }
 
 const defaultPersons = [
-  { id: 1, name: 'kyohei maeda', age: 29 },
-  { id: 2, name: 'sho tsunoda', age: 31 },
+  { id: 1, name: 'kyohei maeda', age: 29, rating: 'good' },
+  { id: 2, name: 'sho tsunoda', age: 31, rating: 'great' },
 ];
 
 // export const persons = ref<Person[]>(defaultPersons);
@@ -25,8 +26,8 @@ const defaultPersons = [
 export const persons = (() => {
   const persons = ref<Person[]>(defaultPersons);
 
-  const addPerson = (name: string, age: number) => {
-    const person = { id: Math.random(), name: name, age: age };
+  const addPerson = (name: string, age: number, rating: string) => {
+    const person = { id: Math.random(), name: name, age: age, rating: rating };
     persons.value.push(person);
   };
 

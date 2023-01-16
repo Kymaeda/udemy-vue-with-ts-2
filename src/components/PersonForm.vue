@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref, computed, inject, DirectiveBinding } from 'vue'
 import { personKey } from './../usePerson'
+import Rating from './Rating.vue';
 
 const name = ref<string>('')
 const age = ref<number>(0)
 const inputName = ref()
+const rating = ref('')
 
 // const addPerson = inject('addPerson')
 // const { addPerson } = inject('persons')
@@ -18,10 +20,11 @@ const { addPerson } = state
 const submit = () => {
   // const person = { id: Math.random(), name: name.value, age: age.value }
   // emit('submit', person)
-  addPerson(name.value, age.value)
+  addPerson(name.value, age.value, rating.value)
   console.log('name: ', name.value)
   name.value = ''
   age.value = 0
+  rating.value = ''
   inputName.value.focus()
 }
 
@@ -57,6 +60,7 @@ const vFocus = {
         <input v-model="age" type="number"/>
       </div>
     </div>
+    <Rating v-model="rating"/>
     <button class="submit-btn" @click.prevent="submit" :disabled="!isValidName">post</button>
   </div>
 </template>

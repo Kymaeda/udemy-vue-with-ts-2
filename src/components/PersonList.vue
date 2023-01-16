@@ -42,6 +42,7 @@ const removePerson = (person_id: number) => {
         <li v-for="person in persons" :key="person.id" class="person">
           <p class="person-name">{{ person.name }}</p>
           <p class="person-age">{{ person.age }}</p>
+          <p class="person-name">{{ person.rating }}</p>
           <button @click="removePerson(person.id)">Delete</button>
           <Button>Delete</Button>
           <Button></Button>
