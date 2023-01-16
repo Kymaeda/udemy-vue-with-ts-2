@@ -2,6 +2,7 @@
 import { ref, computed, inject, DirectiveBinding } from 'vue'
 import { personKey } from './../usePerson'
 import Rating from './Rating.vue';
+import axios from 'axios'
 
 const name = ref<string>('')
 const age = ref<number>(0)
@@ -17,18 +18,11 @@ if (!state) {
 const { addPerson } = state
 
 const submit = () => {
-  fetch('https://udemy-vue-with-ts-default-rtdb.firebaseio.com/persons.json', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: name.value,
-        age: age.value,
-        rating: rating.value,
-      })
-    }
-  )
+  axios.post('https://udemy-vue-with-ts-default-rtdb.firebaseio.com/persons.json', {
+    name: name.value,
+    age: age.value,
+    rating: rating.value,
+  })
 
   name.value = ''
   age.value = 0
