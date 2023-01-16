@@ -16,12 +16,20 @@ if (!state) {
 }
 const { addPerson } = state
 
-// const emit = defineEmits(['submit'])
 const submit = () => {
-  // const person = { id: Math.random(), name: name.value, age: age.value }
-  // emit('submit', person)
-  addPerson(name.value, age.value, rating.value)
-  console.log('name: ', name.value)
+  fetch('https://udemy-vue-with-ts-default-rtdb.firebaseio.com/persons.json', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name.value,
+        age: age.value,
+        rating: rating.value,
+      })
+    }
+  )
+
   name.value = ''
   age.value = 0
   rating.value = ''
