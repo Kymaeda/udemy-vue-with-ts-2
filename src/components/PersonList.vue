@@ -9,8 +9,6 @@ if (!state) {
   throw new Error('key is undefined')
 }
 const { persons, removePerson: deletePerson } = state
-console.log(persons)
-console.log(deletePerson)
 
 // interface Person {
 //   id: number,
@@ -27,7 +25,6 @@ console.log(deletePerson)
 
 // const emit = defineEmits(['remove'])
 const removePerson = (person_id: number) => {
-  console.log("aaaa")
   if (confirm('削除しますか？')) {
     deletePerson(person_id)
   }

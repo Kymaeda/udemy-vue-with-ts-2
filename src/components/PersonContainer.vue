@@ -5,9 +5,14 @@ import { ref, Ref, computed, provide, onMounted } from 'vue';
 import { persons, personKey } from './../usePerson'
 import axios from 'axios'
 
-onMounted(() => {
-  axios.get('https://udemy-vue-with-ts-default-rtdb.firebaseio.com/persons.json')
-    .then((response)=> console.log(response.data))
+const personsList = ref()
+const isLoading = ref<boolean>(false)
+
+onMounted(async () => {
+  isLoading.value = true
+  personsList.value = await axios.get('https://udemy-vue-with-ts-default-rtdb.firebaseio.com/persons.json')
+  isLoading.value = false
+  console.log(personsList.value)
 })
 
 // interface Person {
@@ -60,6 +65,8 @@ const currentComponent = computed(() => {
     <!-- <component :is="PersonList" :persons="persons" @remove="removePerson"></component> -->
 
     <PersonForm />
+    <div v-if="isLoading">Loading...</div>
+    <div v-else>{{ personsList }}</div>
     <PersonList />
   </div>
 </template>
