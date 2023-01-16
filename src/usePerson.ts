@@ -40,5 +40,4 @@ export const persons = (() => {
 
 type PersonTypes = typeof persons;
 
-console.log(typeof persons);
 export const personKey: InjectionKey<PersonTypes> = Symbol('usePerson');

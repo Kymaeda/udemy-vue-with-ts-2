@@ -1,8 +1,14 @@
 <script setup lang="ts">
 import PersonForm from './PersonForm.vue';
 import PersonList from './PersonList.vue';
-import { ref, Ref, computed, provide } from 'vue';
+import { ref, Ref, computed, provide, onMounted } from 'vue';
 import { persons, personKey } from './../usePerson'
+import axios from 'axios'
+
+onMounted(() => {
+  axios.get('https://udemy-vue-with-ts-default-rtdb.firebaseio.com/persons.json')
+    .then((response)=> console.log(response.data))
+})
 
 // interface Person {
 //   id: number,
