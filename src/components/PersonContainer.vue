@@ -10,9 +10,12 @@ const isLoading = ref<boolean>(false)
 
 onMounted(async () => {
   isLoading.value = true
-  personsList.value = await axios.get('https://udemy-vue-with-ts-default-rtdb.firebaseio.com/persons.json')
-  isLoading.value = false
-  console.log(personsList.value)
+  try {
+    personsList.value = await axios.get('htts://udemy-vue-with-ts-default-rtdb.firebaseio.com/persons.json')
+  } catch {
+    console.log('error')
+    isLoading.value = false
+  }
 })
 
 // interface Person {
